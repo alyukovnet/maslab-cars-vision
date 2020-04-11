@@ -14,33 +14,32 @@ int main() {
 
     Mat frame;
 	Mat frameLab;
-	Mat frameR, frameG, frameB, frameY;
+	Mat magicFrame;
+	int red = 100, green = 100, blue = 100;
 	float  M = 0.0, D = 0.0, da = 0.0, db = 0.0;
 	float L = 0.0;
-	VideoCapture vid("../test.mp4");
 
+	namedWindow("Color cast magic", WINDOW_AUTOSIZE);          // CAST MAGIC
+	createTrackbar( "R [%]", "Color cast magic", &red, 100);
+	createTrackbar( "G [%]", "Color cast magic", &green, 100);
+	createTrackbar( "B [%]", "Color cast magic", &blue, 100);
+
+
+	VideoCapture vid("../test.mp4");
 	if (!vid.isOpened()) return -1;
+
 	while (vid.read(frame)) {
-		//imshow("cam", frame);
-		frameR = Mat::zeros(frame.size(), CV_8UC3);
-		//frameG = Mat::zeros(frame.size(), CV_8UC3);
-		//frameB = Mat::zeros(frame.size(), CV_8UC3);
-		frameY = Mat::zeros(frame.size(), CV_8UC3);
-		//BGRtoRed(frameR, frame);
-		//BGRtoGreen(frameG, frame);
-		//BGRtoBlue(frameB, frame);
-		BGRtoYellow(frameY, frame);
-		//imshow("R", frameR);
-		//imshow("G", frameG);
-		//imshow("B", frameB);
-		imshow("Y", frameY);
-		cvtColor(frameY, frameLab, COLOR_BGR2Lab);
-		imshow("camlab", frameLab);
+		imshow("Normal", frame);
+		magicFrame = Mat::zeros(frame.size(), CV_8UC3);
+		castVariator(magicFrame, frame, red, green, blue);
+		imshow("Cast", magicFrame);
+		cvtColor(magicFrame, frameLab, COLOR_BGR2Lab);
+		//imshow("camlab", frameLab);
 		averageChrominanceAndMomentum(M, D, da, db, frameLab, L);
-		cout << D / M << "   " << da << "   " << db << "   " << db / da << "   " << L << endl;
+		cout << D / M << "   " << da << "   " << db << "   " << db / da << "   " << L << endl; // output of calculated values for testing
 		if (waitKey(5) >= 0) break;
 	}
-	//system("pause");
+	
 
     return 0;
 }

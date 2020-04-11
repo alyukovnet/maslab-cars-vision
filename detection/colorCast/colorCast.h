@@ -14,14 +14,7 @@ void check_colorcast();
 
 void averageChrominanceAndMomentum(float&, float&, float&, float&, Mat, float&);
 
-void BGRtoRed(Mat&, Mat&);
-
-void BGRtoGreen(Mat&, Mat&);
-
-void BGRtoBlue(Mat&, Mat&);
-
-void BGRtoYellow(Mat&, Mat&);
-
+void castVariator(Mat&, Mat, int, int, int);   // You are a wizard, Harry :D
 
 
 #endif //MASLAB_CARS_VISION_COLORCAST_H

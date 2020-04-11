@@ -55,47 +55,14 @@ void averageChrominanceAndMomentum(float& M, float& D, float& da, float& db, Mat
 	M = sqrt(Ma * Ma + Mb * Mb);
 }
 
-void BGRtoRed(Mat& dest, Mat& src) { // takes in only default BGR Mat
-
+void castVariator(Mat& dest, Mat src, int Red, int Green, int Blue)   // You are a wizard, Harry :D (src is a standart BGR Mat)
+{
+	int maxx = 100;
 	for (int r = 0; r < src.rows; r++) {
 		for (int c = 0; c < src.cols; c++) {
-			dest.at<Vec3b>(r, c)[0] = src.at<Vec3b>(r, c)[0] * 0;
-			dest.at<Vec3b>(r, c)[1] = src.at<Vec3b>(r, c)[1] * 0;
-			dest.at<Vec3b>(r, c)[2] = src.at<Vec3b>(r, c)[2];
-		}
-	}
-}
-
-void BGRtoGreen(Mat& dest, Mat& src) { // takes in only default BGR Mat
-
-	for (int r = 0; r < src.rows; r++) {
-		for (int c = 0; c < src.cols; c++) {
-			dest.at<Vec3b>(r, c)[0] = src.at<Vec3b>(r, c)[0] * 0;
-			dest.at<Vec3b>(r, c)[1] = src.at<Vec3b>(r, c)[1];
-			dest.at<Vec3b>(r, c)[2] = src.at<Vec3b>(r, c)[2] * 0;
-		}
-	}
-}
-
-void BGRtoBlue(Mat& dest, Mat& src) { // takes in only default BGR Mat
-
-	for (int r = 0; r < src.rows; r++) {
-		for (int c = 0; c < src.cols; c++) {
-			dest.at<Vec3b>(r, c)[0] = src.at<Vec3b>(r, c)[0];
-			dest.at<Vec3b>(r, c)[1] = src.at<Vec3b>(r, c)[1] * 0;
-			dest.at<Vec3b>(r, c)[2] = src.at<Vec3b>(r, c)[2] * 0;
-		}
-	}
-}
-
-
-void BGRtoYellow(Mat& dest, Mat& src) { // takes in only default BGR Mat
-
-	for (int r = 0; r < src.rows; r++) {
-		for (int c = 0; c < src.cols; c++) {
-			dest.at<Vec3b>(r, c)[0] = src.at<Vec3b>(r, c)[0] * 0;
-			dest.at<Vec3b>(r, c)[1] = src.at<Vec3b>(r, c)[1];
-			dest.at<Vec3b>(r, c)[2] = src.at<Vec3b>(r, c)[2];
+			dest.at<Vec3b>(r, c)[0] = src.at<Vec3b>(r, c)[0] * Blue / maxx;
+			dest.at<Vec3b>(r, c)[1] = src.at<Vec3b>(r, c)[1] * Green / maxx;
+			dest.at<Vec3b>(r, c)[2] = src.at<Vec3b>(r, c)[2] * Red / maxx;
 		}
 	}
 }
