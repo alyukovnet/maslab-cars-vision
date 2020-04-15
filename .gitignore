@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+bin
 
 # CMake
 CMakeCache.txt
@@ -41,6 +42,8 @@ build/
 *-build/
 *.user
 *build*
+Makefile
 
 # IDE
 .idea/
+
