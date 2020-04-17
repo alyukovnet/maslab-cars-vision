@@ -24,14 +24,14 @@ void averageChrominanceAndMomentum(float& M, float& D, float& da, float& db, Mat
 	int channels = srcLab.channels();
 	for (int r = 0; r < srcLab.rows; r++) {
 		for (int c = 0; c < srcLab.cols; c++) {
-			Point3_<char> pixelData;
+			Point3_<u_char> pixelData;
 			//L*: 0-255 
 			pixelData.x = srcLab.data[step * r + channels * c + 0];
 			//a*: 0-255 
 			pixelData.y = srcLab.data[step * r + channels * c + 1];
 			//b*: 0-255 
 			pixelData.z = srcLab.data[step * r + channels * c + 2];
-			L += (float)pixelData.x;
+			L += (float)pixelData.z / pixelData.y;
 			da += (float)pixelData.y;
 			db += (float)pixelData.z;
 		}
@@ -41,12 +41,12 @@ void averageChrominanceAndMomentum(float& M, float& D, float& da, float& db, Mat
 	db = db / ((float)srcLab.rows * srcLab.cols);
 	for (int r = 0; r < srcLab.rows; r++) {
 		for (int c = 0; c < srcLab.cols; c++) {
-			Point3_<char> pixelData;
+			Point3_<u_char> pixelData;
 			pixelData.x = srcLab.data[step * r + channels * c + 0]; 
 			pixelData.y = srcLab.data[step * r + channels * c + 1];
 			pixelData.z = srcLab.data[step * r + channels * c + 2];
-			Ma += ((float)pixelData.y - da) * ((float)pixelData.y - da);
-			Mb += ((float)pixelData.z - db) * ((float)pixelData.z - db);
+			Ma += fabs(((float)pixelData.y - da));// * ((float)pixelData.y - da);
+			Mb += fabs(((float)pixelData.z - db));// * ((float)pixelData.z - db);
 		}
 	}
 	Ma = Ma / ((float)srcLab.rows * srcLab.cols);
