@@ -38,27 +38,20 @@ int main() {
 		//imshow("camlab", frameLab);
 	
 		averageChrominanceAndMomentum(M, D, da, db, frameLab, L);
-		if (!((20.0 <= D / M) && (D / M <= 30.0))){
-			if ((da - 128 >= -12.0) && (da - 128 <= 12.0) && (db - 128 >= -12.0) && (db - 128 <= 12.0)){
-				if ((L >= 0.80) && (L <= 1.20) && (db / da >= 0.80) && (db / da <= 1.20)){
-					cout << "NO CAST (minor)" << endl;
-				}
-				else cout << "MINOR or MILD CAST" << endl;
-			}
+		if (!((1.0 <= D / M) && (D / M <= 1.7))){
+			if (D / M < 1){
+				if ((da  >= -4.0) && (da <= 4.0) && (db >= -4.0) && (db  <= 4.0))
+					cout << "K = " << D / M << "-----> MILD CAST" << endl;
+				else cout << "K = " << D / M << "-----> INCOMPATIBLE CAMERA (Color cast detected or camera not tested)" << endl;
+			} 
 			else {
-				if (D / M  >= 37.0) cout << "INCOMPATIBLE/UNCALIBRATED CAMERA (unable to measure cast)" << endl;
-				else cout << "COLOR CAST" << endl;
+				if ((da  >= -4.0) && (da <= 4.0) && (db >= -4.0) && (db  <= 4.0))
+					cout << "K = " << D / M << "-----> MILD CAST" << endl;
+				else cout << "K = " << D / M << "-----> COLOR CAST DETECTED" << endl;
 			}
 		}
-		else {
-			if ((da - 128 >= -20.0) && (da - 128 <= 20.0) && (db - 128 >= -20.0) && (db - 128 <= 20.0)){
-				if ((L >= 0.80) && (L <= 1.20) && (db / da >= 0.80) && (db / da <= 1.20)){
-					cout << "NO CAST (minor)" << endl;
-				}
-				else cout << "MINOR or MILD CAST" << endl;
-			}
-		}
-		//cout << D / M << "   " << da - 128 << "   " << db - 128 << "   " << db / da << "   " << L << endl; // output of calculated values for testing
+		else cout << "K = " << D / M << "-----> NO CAST" << endl;
+		//cout << D / M << "   " << da  << "   " << db  << "   " << L << endl; // output of calculated values for testing
 		if (waitKey(5) >= 0) break;
 	}
 	

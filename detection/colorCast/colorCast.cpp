@@ -31,9 +31,9 @@ void averageChrominanceAndMomentum(float& M, float& D, float& da, float& db, Mat
 			pixelData.y = srcLab.data[step * r + channels * c + 1];
 			//b*: 0-255 
 			pixelData.z = srcLab.data[step * r + channels * c + 2];
-			L += (float)pixelData.z / pixelData.y;
-			da += (float)pixelData.y;
-			db += (float)pixelData.z;
+			L += (float)(pixelData.z - 128) / (pixelData.y - 128);
+			da += (float)(pixelData.y - 128);
+			db += (float)(pixelData.z - 128);
 		}
 	}
 	L = L / ((float)srcLab.rows * srcLab.cols);
@@ -45,8 +45,8 @@ void averageChrominanceAndMomentum(float& M, float& D, float& da, float& db, Mat
 			pixelData.x = srcLab.data[step * r + channels * c + 0]; 
 			pixelData.y = srcLab.data[step * r + channels * c + 1];
 			pixelData.z = srcLab.data[step * r + channels * c + 2];
-			Ma += fabs(((float)pixelData.y - da));// * ((float)pixelData.y - da);
-			Mb += fabs(((float)pixelData.z - db));// * ((float)pixelData.z - db);
+			Ma += fabs(((float)(pixelData.y - 128) - da));// * ((float)pixelData.y - da);
+			Mb += fabs(((float)(pixelData.z - 128) - db));// * ((float)pixelData.z - db);
 		}
 	}
 	Ma = Ma / ((float)srcLab.rows * srcLab.cols);
