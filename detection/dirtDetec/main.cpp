@@ -8,7 +8,7 @@ using namespace cv;
 
 int main(int argc, char *argv[])
 {
-    Mat framel, dframe,th;
+    Mat framel, dframe, th;
 
     VideoCapture cap("/home/vova/work/maslab-cars-vision/detection/dirtDetec/bin/1.mkv");
     cap >> framel;
@@ -26,14 +26,16 @@ int main(int argc, char *argv[])
         cvtColor(frame, frame, COLOR_BGR2GRAY);
         // Display the resulting frame
         absdiff(frame, framel, dframe);
-        framel=dframe;
-        threshold(dframe,dframe, 30, 255, THRESH_BINARY);
-        imshow("Frame", dframe);
+        framel =dframe;
+        //imshow("Frame1", dframe);
+        threshold(dframe, dframe, 15, 255, THRESH_BINARY);
+        imshow("Frame12", dframe);
+        //imshow("Frame3", frame);
 
         // Press  ESC on keyboard to exits
-        char c = (char)waitKey(25);
-        if (c == 27)
-            break;
+        //char c = (char)waitKey(25);
+        //if (c == 27)
+        //    break;
     }
 
     return 0;
