@@ -1,6 +1,0 @@
-#ifndef MASLAB_CARS_VISION_CORRECTION_H
-#define MASLAB_CARS_VISION_CORRECTION_H
-
-void check_correction();
-
-#endif //MASLAB_CARS_VISION_CORRECTION_H
