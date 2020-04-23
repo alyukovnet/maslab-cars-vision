@@ -1,8 +1,8 @@
 /*!
-\file
-\brief Заголовочный файл с описанием класса Interface
+ \file
+ \brief Заголовочный файл с описанием класса Interface
 
-Данный файл содержит в себе определения класса Interface
+ Данный файл содержит в себе определения класса Interface
 
 */
 
@@ -18,18 +18,17 @@ using namespace std;
 using namespace cv;
 
 /*!
-	\brief Обработчик входного видео и интерфейс записи логов
+ \brief Обработчик входного видео и интерфейс вывода логов
 
-	Данный класс анализирует входные аргументы программы,
-    отвечает за первичную обработку кадров (поворот, отражение),
-    вывод информации в консоль и вывод логов с видео в файлы
+ Данный класс анализирует входные аргументы программы,
+ отвечает за первичную обработку кадров (поворот, отражение),
+ вывод информации в консоль и файл
+
 */
 class Interface {
 private:
     // Objects
     VideoCapture cap;          ///< Input video
-    VideoWriter inputWriter;   ///< Modified input video
-    VideoWriter outputWriter;  ///< Output video
     ofstream file;             ///< Text logs file
     // Args
     String videoSource;        ///< Input video path
