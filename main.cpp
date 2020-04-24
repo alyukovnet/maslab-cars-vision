@@ -14,7 +14,8 @@ using namespace cv;
 int main(int argc, char *argv[]) {
     Interface interface(argc, argv);
 
-    Mat frame, frameLab, frameOut, frameOutLab;
+    Mat frame, frameLab, frameOut, frameOutLab, magicFrame;
+    float  M = 0.0, D = 0.0, da = 0.0, db = 0.0; // essential colorCast vars
 
     // Input/Output video windows
     namedWindow("Input", WINDOW_NORMAL);
@@ -35,9 +36,13 @@ int main(int argc, char *argv[]) {
     bool isLab = false;
 
     while (interface.getFrame(frame)) {
-        cvtColor(frame, frameLab, COLOR_BGR2Lab); // convert to Lab
-
         // Color cast magic operations here
+        magicFrame = Mat::zeros(frame.size(), CV_8UC3);
+		castVariator(magicFrame, frame, red, green, blue);
+		imshow("Cast", magicFrame);
+		averageChrominanceAndMomentum(M, D, da, db, magicFrame);
+		castDecision(M, D, da, db);
+        // end colorCast detection
 
         frame.copyTo(frameOut);
         colorCastCorrection(frame, frameOut);
