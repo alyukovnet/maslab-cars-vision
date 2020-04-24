@@ -12,9 +12,11 @@ using namespace cv;
 
 void check_colorcast();
 
-void averageChrominanceAndMomentum(float&, float&, float&, float&, Mat, float&);
+void averageChrominanceAndMomentum(float&, float&, float&, float&, Mat); // main computing function
 
-void castVariator(Mat&, Mat, int, int, int);   // You are a wizard, Harry :D
+void castVariator(Mat&, Mat, int, int, int);   // You are a wizard, Harry :D (dynamic cast applier for detection tests)
+
+void castDecision(float, float, float, float);  // decision on cast appearance (all thresholds and stuff)
 
 
 #endif //MASLAB_CARS_VISION_COLORCAST_H
