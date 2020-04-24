@@ -13,14 +13,13 @@ int main() {
     check_colorcast();
 
     Mat frame;
-	Mat frameLab;
+	Mat frameLab; // useful Mats
 	Mat magicFrame;
-	float  M = 0.0, D = 0.0, da = 0.0, db = 0.0; // initial vars
-	float L = 0.0;
+	float  M = 0.0, D = 0.0, da = 0.0, db = 0.0; // initial vars, means
  
 	//testing trackbars here
 	int red = 100, green = 100, blue = 100;
-	namedWindow("Color cast magic", WINDOW_AUTOSIZE);          // CAST MAGIC
+	namedWindow("Color cast magic", WINDOW_AUTOSIZE);          
 	createTrackbar( "R [%]", "Color cast magic", &red, 100);
 	createTrackbar( "G [%]", "Color cast magic", &green, 100);
 	createTrackbar( "B [%]", "Color cast magic", &blue, 100);
@@ -34,25 +33,9 @@ int main() {
 		magicFrame = Mat::zeros(frame.size(), CV_8UC3);
 		castVariator(magicFrame, frame, red, green, blue);
 		imshow("Cast", magicFrame);
-		cvtColor(magicFrame, frameLab, COLOR_BGR2Lab);
-		//imshow("camlab", frameLab);
-	
-		averageChrominanceAndMomentum(M, D, da, db, frameLab, L);
-		if (!((1.0 <= D / M) && (D / M <= 1.7))){
-			if (D / M < 1){
-				if ((da  >= -4.0) && (da <= 4.0) && (db >= -4.0) && (db  <= 4.0))
-					cout << "K = " << D / M << "-----> MILD CAST" << endl;
-				else cout << "K = " << D / M << "-----> INCOMPATIBLE CAMERA (Color cast detected or camera not tested)" << endl;
-			} 
-			else {
-				if ((da  >= -4.0) && (da <= 4.0) && (db >= -4.0) && (db  <= 4.0))
-					cout << "K = " << D / M << "-----> MILD CAST" << endl;
-				else cout << "K = " << D / M << "-----> COLOR CAST DETECTED" << endl;
-			}
-		}
-		else cout << "K = " << D / M << "-----> NO CAST" << endl;
-		//cout << D / M << "   " << da  << "   " << db  << "   " << L << endl; // output of calculated values for testing
-		if (waitKey(5) >= 0) break;
+		averageChrominanceAndMomentum(M, D, da, db, magicFrame);
+		castDecision(M, D, da, db);
+		if (waitKey(10) >= 0) break;
 	}
 	
 
