@@ -1,14 +1,15 @@
 #include "dirtDetect.h"
 
-dirtDetect::dirtDetect(/* args */)
+DirtDetect::DirtDetect(Interface& interface)
+{
+    iface=&interface;
+}
+
+DirtDetect::~DirtDetect()
 {
 }
 
-dirtDetect::~dirtDetect()
-{
-}
-
-void dirtDetect::detectDirt(Mat frame)
+void DirtDetect::detectDirt(Mat frame)
 {
     if (framel.empty())
     {
@@ -27,12 +28,12 @@ void dirtDetect::detectDirt(Mat frame)
     
     if (x * y * dirtThreshold > nonzeros)
     {
-        cout << "govno" << endl;
+        iface->log("govno");
     }
     
     char c = (char)waitKey(25);
 }
-void dirtDetect::Show()
+void DirtDetect::show()
 {
     if(dFrame.empty()){
         return;

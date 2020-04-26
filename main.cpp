@@ -6,13 +6,16 @@
 #include "colorCast/detection.h"
 #include "colorCast/correction.h"
 
+#include"dirtDetect/dirtDetect.h"
+
 using namespace std;
 using namespace cv;
 
 
 int main(int argc, char *argv[]) {
     Interface interface(argc, argv);
-
+    DirtDetect dirtDetect( interface );
+    
     Mat frame, frameLab, frameOut, frameOutLab, magicFrame;
     float  M = 0.0, D = 0.0, da = 0.0, db = 0.0; // essential colorCast vars
 
@@ -47,7 +50,7 @@ int main(int argc, char *argv[]) {
         colorCastCorrection(frame, frameOut);
 
         // dirtDetect here
-
+        dirtDetect.detectDirt(frame);
         // Log example
         // interface.log("Message");
 
