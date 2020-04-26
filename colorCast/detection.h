@@ -1,5 +1,5 @@
-#ifndef MASLAB_CARS_VISION_COLORCAST_H
-#define MASLAB_CARS_VISION_COLORCAST_H
+#ifndef MASLAB_CARS_VISION_COLORCAST_DETECTION_H
+#define MASLAB_CARS_VISION_COLORCAST_DETECTION_H
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/core.hpp>
@@ -19,4 +19,4 @@ void castVariator(Mat&, Mat, int, int, int);   // You are a wizard, Harry :D (dy
 void castDecision(float, float, float, float);  // decision on cast appearance (all thresholds and stuff)
 
 
-#endif //MASLAB_CARS_VISION_COLORCAST_H
+#endif //MASLAB_CARS_VISION_COLORCAST_DETECTION_H

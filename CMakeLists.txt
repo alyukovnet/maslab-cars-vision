@@ -2,6 +2,7 @@ cmake_minimum_required( VERSION 3.0 )
 project( maslab-cars-vision )
 
 set(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_COMPILER g++)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 # OpenCV
@@ -15,7 +16,9 @@ add_executable( main
         main.cpp
         core/interface.h
         core/interface.cpp
-        colorCast/correction/correction.h
-        colorCast/correction/correction.cpp )
+        colorCast/correction.h
+        colorCast/correction.cpp
+        colorCast/detection.cpp
+        colorCast/detection.h)
 
 target_link_libraries( main ${OpenCV_LIBS} )
