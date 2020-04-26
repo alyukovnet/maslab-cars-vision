@@ -24,7 +24,7 @@ void averageChrominanceAndMomentum(float& M, float& D, float& da, float& db, Mat
 	int channels = srcLab.channels();
 	for (int r = 0; r < srcLab.rows; r++) {
 		for (int c = 0; c < srcLab.cols; c++) {
-			Point3_<u_char> pixelData;
+			Point3i pixelData;
 			//L*: 0-255 
 			pixelData.x = srcLab.data[step * r + channels * c + 0];
 			//a*: 0-255 
@@ -39,7 +39,7 @@ void averageChrominanceAndMomentum(float& M, float& D, float& da, float& db, Mat
 	db = db / ((float)srcLab.rows * srcLab.cols);
 	for (int r = 0; r < srcLab.rows; r++) {
 		for (int c = 0; c < srcLab.cols; c++) {
-			Point3_<u_char> pixelData;
+			Point3i pixelData;
 			pixelData.x = srcLab.data[step * r + channels * c + 0]; 
 			pixelData.y = srcLab.data[step * r + channels * c + 1];
 			pixelData.z = srcLab.data[step * r + channels * c + 2];
