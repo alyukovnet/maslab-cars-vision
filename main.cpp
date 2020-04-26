@@ -3,9 +3,8 @@
 #include <opencv2/imgproc.hpp>
 
 #include "core/interface.h"
-#include "colorCast/correction/correction.h"
-#include "colorCast/colorCast.h"
-#include "dirtDetec/dirtDetect.h"
+#include "colorCast/detection.h"
+#include "colorCast/correction.h"
 
 using namespace std;
 using namespace cv;
@@ -39,7 +38,7 @@ int main(int argc, char *argv[]) {
         // Color cast magic operations here
         magicFrame = Mat::zeros(frame.size(), CV_8UC3);
 		castVariator(magicFrame, frame, red, green, blue);
-		imshow("Cast", magicFrame);
+		magicFrame.copyTo(frame);
 		averageChrominanceAndMomentum(M, D, da, db, magicFrame);
 		castDecision(M, D, da, db);
         // end colorCast detection
