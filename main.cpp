@@ -1,10 +1,8 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
 
 #include "core/interface.h"
-#include "colorCast/detection.h"
-#include "colorCast/correction.h"
+#include "colorCast/colorCast.h"
 
 using namespace std;
 using namespace cv;
@@ -13,7 +11,7 @@ using namespace cv;
 int main(int argc, char *argv[]) {
     Interface interface(argc, argv);
 
-    Mat frame, frameLab, frameOut, frameOutLab, magicFrame;
+    Mat frame, frameOut;
     float  M = 0.0, D = 0.0, da = 0.0, db = 0.0; // essential colorCast vars
 
     // Input/Output video windows
@@ -30,21 +28,30 @@ int main(int argc, char *argv[]) {
     createTrackbar( "B [%]", "Color cast magic", &blue, 100);
 
     interface.start();
+    ColorCast colorCast;
 
     // Main loop
-    bool isLab = false;
-
     while (interface.getFrame(frame)) {
-        // Color cast magic operations here
-        magicFrame = Mat::zeros(frame.size(), CV_8UC3);
-		castVariator(magicFrame, frame, red, green, blue);
-		magicFrame.copyTo(frame);
-		averageChrominanceAndMomentum(M, D, da, db, magicFrame);
-		castDecision(M, D, da, db);
-        // end colorCast detection
-
+		castVariator(frame, frame, red, green, blue);  // Cast magic
         frame.copyTo(frameOut);
-        colorCastCorrection(frame, frameOut);
+
+        switch (colorCast.detect(frame)) {
+            case ColorCast::NO_CAST:
+                interface.log(format("K = %f -----> NO CAST", colorCast.getCastFactor()));
+                break;
+            case ColorCast::MILD:
+                interface.log(format("K = %f -----> MILD CAST", colorCast.getCastFactor()));
+                break;
+            case ColorCast::DETECTED:
+                interface.log(format("K = %f -----> COLOR CAST DETECTED", colorCast.getCastFactor()));
+                // ColorCast correction
+                colorCast.correct(frame, frameOut);
+                break;
+            case ColorCast::INCOMPATIBLE_CAMERA:
+                interface.log(format("K = %f -----> INCOMPATIBLE CAMERA "
+                                     "(Color cast detected or camera not tested)", colorCast.getCastFactor()));
+                break;
+        }
 
         // dirtDetect here
 
@@ -52,19 +59,14 @@ int main(int argc, char *argv[]) {
         // interface.log("Message");
 
         // Show
-        cvtColor(frame, frameLab, COLOR_BGR2Lab);
-        imshow("Input", !isLab ? frame : frameLab);
+        imshow("Input", frame);
         resizeWindow("Input", 720, 405);
 
-        cvtColor(frameOut, frameOutLab, COLOR_BGR2Lab);
-        imshow("Output", !isLab ? frameOut : frameOutLab);
+        imshow("Output", frameOut);
         resizeWindow("Output", 720, 405);
 
         // Hot keys
         switch ((char) waitKey(25)) {
-            case 'l':             // Switch RGB/Lab
-                isLab = !isLab;
-                break;
             case 'q':             // Quit
                 exit(0);
         }
