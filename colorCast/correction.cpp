@@ -12,7 +12,7 @@ ColorCast::ColorCast() {
 
 int ColorCast::detect(Mat& input) {
     // averageChrominanceAndMomentum
-    cvtColor(input, inputLab_, COLOR_BGR2Lab);
+    /*cvtColor(input, inputLab_, COLOR_BGR2Lab);
     Scalar Mat_mean = mean(input);
     mean_a_ = Mat_mean[1] - 128;
     mean_b_ = Mat_mean[2] - 128;
@@ -25,15 +25,57 @@ int ColorCast::detect(Mat& input) {
 
     D_ = sqrt(mean_a_*mean_a_ + mean_b_*mean_b_);
     M_ = sqrt(M_a_*M_a_ + M_b_*M_b_);
+    CastFactor_ = D_ / M_;*/
+
+
+    cvtColor(input, inputLab_, COLOR_BGR2Lab);
+    mean_a_ = 0;
+    mean_b_ = 0;
+    M_a_ = 0;
+    M_b_ = 0;
+    D_ = 0;
+    M_ = 0;
+	int step = inputLab_.step;
+	int channels = inputLab_.channels();
+	for (int r = 0; r < inputLab_.rows; r++) {
+		for (int c = 0; c < inputLab_.cols; c++) {
+			Point3i pixelData;
+			//L*: 0-255 
+			pixelData.x = inputLab_.data[step * r + channels * c + 0];
+			//a*: 0-255 
+			pixelData.y = inputLab_.data[step * r + channels * c + 1];
+			//b*: 0-255 
+			pixelData.z = inputLab_.data[step * r + channels * c + 2];
+			mean_a_ += (double)(pixelData.y - 128);
+			mean_b_ += (double)(pixelData.z - 128);
+		}
+	}
+	mean_a_ = mean_a_ / ((double)inputLab_.rows * inputLab_.cols);
+	mean_b_ = mean_b_ / ((double)inputLab_.rows * inputLab_.cols);
+	for (int r = 0; r < inputLab_.rows; r++) {
+		for (int c = 0; c < inputLab_.cols; c++) {
+			Point3i pixelData;
+			pixelData.x = inputLab_.data[step * r + channels * c + 0]; 
+			pixelData.y = inputLab_.data[step * r + channels * c + 1];
+			pixelData.z = inputLab_.data[step * r + channels * c + 2];
+			M_a_ += fabs(((double)(pixelData.y - 128) - mean_a_));
+			M_b_ += fabs(((double)(pixelData.z - 128) - mean_b_));
+		}
+	}
+	M_a_ = M_a_ / ((double)inputLab_.rows * inputLab_.cols);
+	M_b_ = M_b_ / ((double)inputLab_.rows * inputLab_.cols);
+	D_ = sqrt(mean_a_ * mean_a_ + mean_b_ * mean_b_);
+	M_ = sqrt(M_a_ * M_a_ + M_b_ * M_b_);
     CastFactor_ = D_ / M_;
+
 
     // castDecision
     if (1.0 <= CastFactor_ && CastFactor_ <= 2.0) {
         return NO_CAST;
-    } else if ((mean_a_ >= -4.0) && (mean_a_ <= 4.0) && (mean_b_ >= -4.0) && (mean_b_ <= 4.0)) {
-        return MILD;
     } else if (CastFactor_ < 1.0) {
-        return INCOMPATIBLE_CAMERA;
+        if ((mean_a_ >= -4.0) && (mean_a_ <= 4.0) && (mean_b_ >= -4.0) && (mean_b_ <= 4.0)) 
+        return MILD;
+        else return INCOMPATIBLE_CAMERA;
     } else if (CastFactor_ > 2.0) {
         return DETECTED;
     }
