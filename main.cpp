@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     moveWindow("Output", 920, 0);
 
     // Cast Magic
-    int red = 100, green = 100, blue = 100, dirt = 100;
+    int red = 100, green = 100, blue = 100, dirt = 0;
     namedWindow("Color cast magic", WINDOW_NORMAL);
     createTrackbar("R [%]", "Color cast magic", &red, 100);
     createTrackbar("G [%]", "Color cast magic", &green, 100);
@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     // Main loop
     while (interface.getFrame(frame)) {
 		castVariator(frame, frame, red, green, blue);  // Cast magic
+        frame = dirtDetect.derter(frame,dirt);
         frame.copyTo(frameOut);
 
         switch (colorCast.detect(frame)) {
