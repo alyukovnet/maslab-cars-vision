@@ -17,8 +17,6 @@ add_executable( main
         core/interface.h
         core/interface.cpp
         colorCast/correction.h
-        colorCast/correction.cpp
-        colorCast/detection.cpp
-        colorCast/detection.h)
+        colorCast/correction.cpp )
 
 target_link_libraries( main ${OpenCV_LIBS} )
