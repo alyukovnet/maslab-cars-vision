@@ -93,7 +93,6 @@ void ColorCast::correct(Mat& input, Mat& output) {
             127/Mat_mean[1],
             127/Mat_mean[2]));
     multiply(output, maskGray, output);
-    detect(output);
 }
 
 ColorCast::~ColorCast() {

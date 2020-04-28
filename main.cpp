@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 {
     Interface interface(argc, argv);
 
-    float M = 0.0, D = 0.0, da = 0.0, db = 0.0; // essential colorCast vars
     Mat frame, frameOut;
 
     // Input/Output video windows

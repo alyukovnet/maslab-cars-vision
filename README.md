@@ -12,7 +12,7 @@ cd maslab-cars-vision
 cmake .
 cmake --build
 ```
-
+> Set flag `CMAKE_CXX_FLAGS` to `-static-libstdc++` for integrate g++ libs in executable file
 ## Run
 
 ```

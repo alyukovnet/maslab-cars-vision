@@ -47,3 +47,10 @@ Makefile
 # IDE
 .idea/
 
+# Resources
+*.mov
+*.mp4
+*.avi
+*.zip
+*.7z
+*.rar
