@@ -8,8 +8,9 @@ Detecting problems with camera and maintaining cars functioning.
 3) OpenCV 4.2.0
 ```
 git clone https://github.com/alyukovnet/maslab-cars-vision.git
+cd maslab-cars-vision
 cmake .
-make
+cmake --build
 ```
 
 ## Run
@@ -35,9 +36,9 @@ Usage: main [params] input
         input
                 Path to input video (required)
 ```
+Example: `./bin/main video.mp4 --rotate=90 -r`
 
 ### Hot keys
 | Key | Value                        |
 |-----|------------------------------|
-| `l` | Switch Color model (RGB/Lab) |
 | `q` | Quit                         |

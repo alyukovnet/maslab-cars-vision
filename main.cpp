@@ -12,7 +12,6 @@ using namespace cv;
 int main(int argc, char *argv[])
 {
     Interface interface(argc, argv);
-    DirtDetect dirtDetect;
 
     float M = 0.0, D = 0.0, da = 0.0, db = 0.0; // essential colorCast vars
     Mat frame, frameOut;
@@ -29,10 +28,11 @@ int main(int argc, char *argv[])
     createTrackbar("R [%]", "Color cast magic", &red, 100);
     createTrackbar("G [%]", "Color cast magic", &green, 100);
     createTrackbar("B [%]", "Color cast magic", &blue, 100);
-    createTrackbar("D [%]", "Color cast magic", &dirt, 100);
+    createTrackbar("Dirt [%]", "Color cast magic", &dirt, 100);
 
     interface.start();
     ColorCast colorCast;
+    DirtDetect dirtDetect;
 
     // Main loop
     while (interface.getFrame(frame)) {
@@ -54,8 +54,8 @@ int main(int argc, char *argv[])
             case ColorCast::INCOMPATIBLE_CAMERA:
                 interface.log(format("K = %f -----> INCOMPATIBLE CAMERA "
                                      "(Color cast detected or camera not tested)", colorCast.getCastFactor()));
-        }
                 break;
+        }
 
         // dirtDetect here
         if(dirtDetect.detectDirt(frame)){

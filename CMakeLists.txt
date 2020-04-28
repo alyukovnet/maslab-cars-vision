@@ -16,7 +16,7 @@ add_executable( main
         core/interface.h
         core/interface.cpp
         colorCast/colorCast.h
-        colorCast/colorCast.cpp)
+        colorCast/colorCast.cpp
         dirtDetect/dirtDetect.cpp
         dirtDetect/dirtDetect.h)
 
