@@ -19,6 +19,8 @@ add_executable( main
         colorCast/correction.h
         colorCast/correction.cpp
         colorCast/detection.cpp
-        colorCast/detection.h)
+        colorCast/detection.h
+        dirtDetect/dirtDetect.cpp
+        dirtDetect/dirtDetect.h)
 
 target_link_libraries( main ${OpenCV_LIBS} )
