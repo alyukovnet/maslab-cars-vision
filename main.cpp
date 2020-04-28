@@ -51,9 +51,11 @@ int main(int argc, char *argv[])
 
         frame.copyTo(frameOut);
         colorCastCorrection(frame, frameOut);
-        int a = dirtDetect.detectDirt(frame);
-        // dirtDetect here
         
+        // dirtDetect here
+        if(dirtDetect.detectDirt(frame)){
+            interface.log("Detected dirt");
+        }
         // Log example
         // interface.log("Message");
 
