@@ -1,9 +1,8 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
 
 #include "core/interface.h"
-#include "colorCast/correction.h"
+#include "colorCast/colorCast.h"
 
 using namespace std;
 using namespace cv;

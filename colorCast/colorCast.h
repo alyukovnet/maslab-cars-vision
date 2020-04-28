@@ -7,8 +7,8 @@
 
 */
 
-#ifndef MASLAB_CARS_VISION_COLORCAST_CORRECTION_H
-#define MASLAB_CARS_VISION_COLORCAST_CORRECTION_H
+#ifndef MASLAB_CARS_VISION_COLORCAST_H
+#define MASLAB_CARS_VISION_COLORCAST_H
 
 #include <opencv2/core.hpp>
 using namespace cv;
@@ -64,4 +64,4 @@ public:
 void castVariator(Mat& dest, Mat& src, int Red, int Green, int Blue);
 
 
-#endif //MASLAB_CARS_VISION_COLORCAST_CORRECTION_H
+#endif //MASLAB_CARS_VISION_COLORCAST_H
