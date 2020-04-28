@@ -4,28 +4,32 @@
 #include "core/interface.h"
 #include "colorCast/colorCast.h"
 
+#include "dirtDetect/dirtDetect.h"
+
 using namespace std;
 using namespace cv;
 
-
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     Interface interface(argc, argv);
+    DirtDetect dirtDetect;
 
+    float M = 0.0, D = 0.0, da = 0.0, db = 0.0; // essential colorCast vars
     Mat frame, frameOut;
-    float  M = 0.0, D = 0.0, da = 0.0, db = 0.0; // essential colorCast vars
 
     // Input/Output video windows
     namedWindow("Input", WINDOW_NORMAL);
     namedWindow("Output", WINDOW_NORMAL);
-    moveWindow("Input",200,0);
-    moveWindow("Output",920,0);
+    moveWindow("Input", 200, 0);
+    moveWindow("Output", 920, 0);
 
     // Cast Magic
-    int red = 100, green = 100, blue = 100;
+    int red = 100, green = 100, blue = 100, dirt = 100;
     namedWindow("Color cast magic", WINDOW_NORMAL);
-    createTrackbar( "R [%]", "Color cast magic", &red, 100);
-    createTrackbar( "G [%]", "Color cast magic", &green, 100);
-    createTrackbar( "B [%]", "Color cast magic", &blue, 100);
+    createTrackbar("R [%]", "Color cast magic", &red, 100);
+    createTrackbar("G [%]", "Color cast magic", &green, 100);
+    createTrackbar("B [%]", "Color cast magic", &blue, 100);
+    createTrackbar("D [%]", "Color cast magic", &dirt, 100);
 
     interface.start();
     ColorCast colorCast;
@@ -50,11 +54,13 @@ int main(int argc, char *argv[]) {
             case ColorCast::INCOMPATIBLE_CAMERA:
                 interface.log(format("K = %f -----> INCOMPATIBLE CAMERA "
                                      "(Color cast detected or camera not tested)", colorCast.getCastFactor()));
-                break;
         }
+                break;
 
         // dirtDetect here
-
+        if(dirtDetect.detectDirt(frame)){
+            interface.log("Detected dirt");
+        }
         // Log example
         // interface.log("Message");
 

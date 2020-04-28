@@ -17,5 +17,7 @@ add_executable( main
         core/interface.cpp
         colorCast/colorCast.h
         colorCast/colorCast.cpp)
+        dirtDetect/dirtDetect.cpp
+        dirtDetect/dirtDetect.h)
 
 target_link_libraries( main ${OpenCV_LIBS} )
