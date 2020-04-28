@@ -2,8 +2,10 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include"../core/interface.h"
 #include<string.h>
+#include <ctime>
 
 
 using namespace std;
@@ -14,17 +16,20 @@ class DirtDetect
 private:
     Mat framel ;
     Mat tmpFrame;
+    Mat dirtlay;
     int x,y;
-    double dirtThreshold=0.9;
+    double dirtThreshold=0.1;
     Mat tmpFrameThresh;
-    Mat dFrame;
-    Interface* iface;
+    Mat dFrame,dFrame2,dFrame1;
+    
 public:
-    DirtDetect(Interface&,int , int);
-    DirtDetect(Interface&,Mat);
-    DirtDetect(Interface&);
+
+    DirtDetect(int , int);
+    DirtDetect(Mat);
+    DirtDetect();
     ~DirtDetect();
-    void detectDirt(Mat);
+    int detectDirt(Mat);
     void show();
+    Mat derter(Mat, int);
 };
 
