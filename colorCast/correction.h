@@ -55,7 +55,7 @@ public:
     /*!
     Устраняет проблему ColorCast
     */
-    void correct(Mat& output);
+    void correct(Mat& input, Mat& output);
 
     ~ColorCast();
 };

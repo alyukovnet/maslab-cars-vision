@@ -33,9 +33,8 @@ int main(int argc, char *argv[]) {
 
     // Main loop
     while (interface.getFrame(frame)) {
-        frame.copyTo(frameOut);
-
 		castVariator(frame, frame, red, green, blue);  // Cast magic
+        frame.copyTo(frameOut);
 
         switch (colorCast.detect(frame)) {
             case ColorCast::NO_CAST:
@@ -47,7 +46,7 @@ int main(int argc, char *argv[]) {
             case ColorCast::DETECTED:
                 interface.log(format("K = %f -----> COLOR CAST DETECTED", colorCast.getCastFactor()));
                 // ColorCast correction
-                colorCast.correct(frameOut);
+                colorCast.correct(frame, frameOut);
                 break;
             case ColorCast::INCOMPATIBLE_CAMERA:
                 interface.log(format("K = %f -----> INCOMPATIBLE CAMERA "

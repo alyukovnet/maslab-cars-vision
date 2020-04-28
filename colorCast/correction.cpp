@@ -85,15 +85,18 @@ double ColorCast::getCastFactor() {
     return CastFactor_;
 };
 
-void ColorCast::correct(Mat& output) {
-
-//    Mat diffMat(input.rows, input.cols, CV_8UC3, Scalar(0, ));
-
-  //  cvtColor(inputLab_, output, COLOR_Lab2BGR);
+void ColorCast::correct(Mat& input, Mat& output) {
+    Scalar Mat_mean = mean(output);  // Mean values of BGR
+    // Gray scale method
+    Mat maskGray(input.rows, input.cols, CV_8UC3, Scalar(
+            127/Mat_mean[0],
+            127/Mat_mean[1],
+            127/Mat_mean[2]));
+    multiply(output, maskGray, output);
+    detect(output);
 }
 
 ColorCast::~ColorCast() {
-
     return;
 }
 
