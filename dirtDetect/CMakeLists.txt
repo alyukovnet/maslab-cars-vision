@@ -9,9 +9,9 @@ find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 # sources list
-add_executable( detection
+add_executable( dirtDetect
         main.cpp
-        detection.cpp
-        detection.h)
+        dirtDetect.cpp
+        dirtDetect.h)
 
-target_link_libraries( detection ${OpenCV_LIBS} )
+target_link_libraries( dirtDetect ${OpenCV_LIBS} )

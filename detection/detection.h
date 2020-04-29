@@ -1,6 +1,0 @@
-#ifndef MASLAB_CARS_VISION_DETECTION_H
-#define MASLAB_CARS_VISION_DETECTION_H
-
-void check_detection();
-
-#endif //MASLAB_CARS_VISION_DETECTION_H
