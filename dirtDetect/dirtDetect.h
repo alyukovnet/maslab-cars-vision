@@ -3,6 +3,7 @@
 #include <opencv2/imgproc.hpp>
 #include <string.h>
 #include <ctime>
+#include<iostream>
 
 
 using namespace std;
@@ -15,7 +16,7 @@ private:
     Mat tmpFrame;
     Mat dirtlay;
     int x,y;
-    double dirtThreshold=0.1;
+    double dirtThreshold=0.02;
     Mat tmpFrameThresh;
     Mat dFrame,dFrame2,dFrame1;
     

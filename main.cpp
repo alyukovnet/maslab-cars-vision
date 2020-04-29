@@ -5,7 +5,6 @@
 #include "colorCast/colorCast.h"
 
 #include "dirtDetect/dirtDetect.h"
-
 using namespace std;
 using namespace cv;
 
@@ -65,6 +64,7 @@ int main(int argc, char *argv[])
         // interface.log("Message");
 
         // Show
+        //dirtDetect.show();
         imshow("Input", frame);
         resizeWindow("Input", 720, 405);
 

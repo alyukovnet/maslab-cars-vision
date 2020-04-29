@@ -33,7 +33,8 @@ int DirtDetect::detectDirt(Mat frame)
 
     // imshow("Frame12", dFrame1);
     int nonzeros = countNonZero(dFrame1);
-
+    //cout<<nonzeros<<endl;
+    //cout<<x * y * dirtThreshold<<endl;
     if (x * y * dirtThreshold < nonzeros)
     {
         return 1;
@@ -55,7 +56,7 @@ Mat DirtDetect::derter(Mat frame, int dirt)
 
         dirtlay.create(frame.rows, frame.cols, frame.type());
 
-        circle(dirtlay, Point(100 + rand() % (frame.rows - 200), 100 + rand() % (frame.cols - 200)), 50, Scalar(255, 255, 255), 75, 0);
+        circle(dirtlay, Point(100 + rand() % (frame.cols - 200), 100 + rand() % (frame.rows - 200)), 75, Scalar(255, 255, 255), 100, 0);
         blur(dirtlay, dirtlay, Size(50, 50), Point(-1, -1));
     }
     //imshow("Frame1", dirtlay);
