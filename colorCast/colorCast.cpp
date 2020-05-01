@@ -20,7 +20,7 @@ int ColorCast::detect(Mat& input)
     cvtColor(input, inputLab_, COLOR_BGR2Lab);
     Scalar Mat_mean = mean(inputLab_);
     if (Mat_mean[0] < 100){
-			Kp = 1.9 - Mat_mean[0]/130.0;
+			Kp = 1.9 - (130 - Mat_mean[0])/260.0;
 			con = (int)con*(1.0 + 1.3*(130 - Mat_mean[0])/130.0);
 			brightness = brightness + (int)20*(130 - Mat_mean[0])/130.0;
 			input.convertTo(input, -1, 3.0*con/100.0, brightness);
