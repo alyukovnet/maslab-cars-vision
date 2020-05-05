@@ -21,13 +21,13 @@ int main(int argc, char *argv[])
     moveWindow("Output", 920, 0);
 
     // Cast Magic
-    int red = 100, green = 100, blue = 100, dirt = 0;
+    int red = 100, green = 100, blue = 100, dirt = 0,dirtc=0;
     namedWindow("Color cast magic", WINDOW_NORMAL);
     createTrackbar("R [%]", "Color cast magic", &red, 100);
     createTrackbar("G [%]", "Color cast magic", &green, 100);
     createTrackbar("B [%]", "Color cast magic", &blue, 100);
     createTrackbar("Dirt [%]", "Color cast magic", &dirt, 100);
-
+    createTrackbar("Count [%]", "Color cast magic", &dirtc, 5);
     interface.start();
     ColorCast colorCast;
     DirtDetect dirtDetect;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     // Main loop
     while (interface.getFrame(frame)) {
 		castVariator(frame, frame, red, green, blue);  // Cast magic
-        frame = dirtDetect.derter(frame,dirt);
+        frame = dirtDetect.derter(frame,dirt,dirtc);
         frame.copyTo(frameOut);
 
         switch (colorCast.detect(frame)) {
@@ -50,14 +50,14 @@ int main(int argc, char *argv[])
         }
 
         // dirtDetect here
-        if(dirtDetect.detectDirt(frame)){
+        if(dirtDetect.detectDirt(frameOut)){
             interface.log("Detected dirt");
         }
         // Log example
         // interface.log("Message");
 
         // Show
-        //dirtDetect.show();
+        dirtDetect.show();
         imshow("Input", frame);
         resizeWindow("Input", 720, 405);
 
