@@ -46,7 +46,7 @@ Makefile
 
 # IDE
 .idea/
-
+.vscode
 # Resources
 *.mov
 *.mp4

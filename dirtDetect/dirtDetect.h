@@ -3,8 +3,7 @@
 #include <opencv2/imgproc.hpp>
 #include <string.h>
 #include <ctime>
-#include<iostream>
-
+#include <iostream>
 
 using namespace std;
 using namespace cv;
@@ -12,22 +11,24 @@ using namespace cv;
 class DirtDetect
 {
 private:
-    Mat framel ;
+    Mat framel;
     Mat tmpFrame;
     Mat dirtlay;
-    int x,y;
-    double dirtThreshold=0.02;
+    int x, y;
+    double dirtThreshold = 0.02;
     Mat tmpFrameThresh;
-    Mat dFrame,dFrame2,dFrame1;
-    
-public:
+    Mat dFrame, dFrame2, dFrame1;
+    int count;
+    RNG rng;
 
-    DirtDetect(int , int);
+public:
+    DirtDetect(int, int);
     DirtDetect(Mat);
     DirtDetect();
     ~DirtDetect();
     int detectDirt(Mat);
     void show();
-    Mat derter(Mat, int);
+    Mat derter(Mat, int, int);
+    void draw(Mat, Mat);
+    void draw_l(Mat, Mat);
 };
-
