@@ -8,7 +8,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
-# add_subdirectory(colorCast/correction)
+add_subdirectory(ui)
 
 # sources list
 add_executable( main
