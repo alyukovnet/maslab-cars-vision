@@ -42,17 +42,10 @@ int main(int argc, char *argv[])
             case ColorCast::NO_CAST:
                 interface.log(format("K = %f -----> NO CAST", colorCast.getCastFactor()));
                 break;
-            case ColorCast::MILD:
-                interface.log(format("K = %f -----> MILD CAST", colorCast.getCastFactor()));
-                break;
             case ColorCast::DETECTED:
                 interface.log(format("K = %f -----> COLOR CAST DETECTED", colorCast.getCastFactor()));
                 // ColorCast correction
                 colorCast.correct(frame, frameOut);
-                break;
-            case ColorCast::INCOMPATIBLE_CAMERA:
-                interface.log(format("K = %f -----> INCOMPATIBLE CAMERA "
-                                     "(Color cast detected or camera not tested)", colorCast.getCastFactor()));
                 break;
         }
 
