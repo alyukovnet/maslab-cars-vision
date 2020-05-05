@@ -54,10 +54,21 @@ void Stream::process() {
     }
     castVariator(inFrame, inFrame, cast[0], cast[1], cast[2]);
     inFrame.copyTo(outFrame);
-    colorCast.correct(inFrame, outFrame);
-    _settings->correctingIndicator->setStatus("Enabled", Indicator::GREEN);
 
-    // processing i/o frames
+    switch (colorCast.detect(inFrame)) {
+        case ColorCast::NO_CAST:
+            _settings->castFactorIndicator->setStatus(to_string(colorCast.getCastFactor()));
+            _settings->colorCastIndicator->setStatus("No cast", Indicator::GREEN);
+            _settings->correctingIndicator->setStatus("Disabled");
+            break;
+        case ColorCast::DETECTED:
+            _settings->castFactorIndicator->setStatus(to_string(colorCast.getCastFactor()));
+            _settings->colorCastIndicator->setStatus("Detected", Indicator::RED);
+            // ColorCast correction
+            colorCast.correct(inFrame, outFrame);
+            _settings->correctingIndicator->setStatus("Enabled", Indicator::GREEN);
+            break;
+    }
 }
 
 QPixmap Stream::getInFrame() {
