@@ -26,7 +26,7 @@ private:
     Mat inFrame;
     Mat outFrame;
     ColorCast colorCast;
-    DirtDetect dirtDetect;
+    DirtDetect *dirtDetect;
     SettingsLayout *_settings;
     int cast[3]{};
     int dirt;
@@ -40,6 +40,7 @@ public:
     QPixmap getInFrame();
     QPixmap getOutFrame();
     static QPixmap convertFrame(Mat&);
+    void refresh();
 public slots:
     void setRedCast(int);
     void setGreenCast(int);

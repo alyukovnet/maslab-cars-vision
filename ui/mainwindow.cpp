@@ -113,6 +113,7 @@ void MainWindow::openFile()
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Video"), ".", tr("Video Files (*.mp4 *.mov *.avi)"));
     if (fileName.length() > 0) {
         if (vid->open(fileName.toStdString())) {
+            vid->refresh();
             inputVideo->setScene(new QGraphicsScene(this));
             inPixmap = new QGraphicsPixmapItem;
             inputVideo->scene()->addItem(inPixmap);

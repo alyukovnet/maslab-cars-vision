@@ -14,6 +14,7 @@ Stream::Stream(SettingsLayout *settings) {
     outFrame = Mat::zeros(360, 640, CV_8UC3);
     cast[0] = cast[1] = cast[2] = 100;
     dirt = dirtCount = 0;
+    dirtDetect = new DirtDetect;
     _settings = settings;
 }
 
@@ -53,14 +54,18 @@ void Stream::close() {
 }
 
 void Stream::process() {
+    // if no frame, repeat video
     if (!file.read(inFrame)) {
         file.set(CAP_PROP_POS_FRAMES, 0);
         file.read(inFrame);
     }
+
+    // simulator works
     castVariator(inFrame, inFrame, cast[0], cast[1], cast[2]);
-    inFrame = dirtDetect.derter(inFrame, dirt, dirtCount);
+    inFrame = dirtDetect->derter(inFrame, dirt, dirtCount);
     inFrame.copyTo(outFrame);
 
+    // ColorCast detection
     switch (colorCast.detect(inFrame)) {
         case ColorCast::NO_CAST:
             _settings->castFactorIndicator->setStatus(to_string(colorCast.getCastFactor()));
@@ -76,11 +81,17 @@ void Stream::process() {
             break;
     }
 
-    if (dirtDetect.detectDirt(outFrame)){
+    // Dirt detection
+    if (dirtDetect->detectDirt(outFrame)){
         _settings->dirtIndicator->setStatus("Detected", Indicator::RED);
     } else {
         _settings->dirtIndicator->setStatus("No");
     }
+}
+
+void Stream::refresh() {
+    delete dirtDetect;
+    dirtDetect = new DirtDetect;
 }
 
 QPixmap Stream::getInFrame() {
