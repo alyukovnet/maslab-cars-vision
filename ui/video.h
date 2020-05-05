@@ -10,12 +10,14 @@
 #include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
 #include "../colorCast/colorCast.h"
+#include "../dirtDetect/dirtDetect.h"
 #include "settingsLayout.h"
 
 using namespace std;
 using namespace cv;
 
 class SettingsLayout;
+class DirtDetect;
 
 class Stream: public QObject {
     Q_OBJECT
@@ -24,9 +26,11 @@ private:
     Mat inFrame;
     Mat outFrame;
     ColorCast colorCast;
+    DirtDetect dirtDetect;
     SettingsLayout *_settings;
     int cast[3]{};
     int dirt;
+    int dirtCount;
 public:
     Stream(SettingsLayout *settings);
     bool open(string);
@@ -41,6 +45,7 @@ public slots:
     void setGreenCast(int);
     void setBlueCast(int);
     void setDirt(int);
+    void setDirtCount(int);
 };
 
 

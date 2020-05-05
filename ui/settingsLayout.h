@@ -26,6 +26,7 @@ public:
     PercentSlider *greenSlider;
     PercentSlider *blueSlider;
     PercentSlider *dirtSlider;
+    PercentSlider *dirtCountSlider;
 
     Indicator *correctingIndicator;
     Indicator *colorCastIndicator;
@@ -43,7 +44,7 @@ class PercentSlider: public QWidget
 
 public:
     QSlider *slider;
-    explicit PercentSlider(const QString& text, QWidget *parent, int value = 100);
+    explicit PercentSlider(const QString& text, QWidget *parent, int value = 100, int maxValue = 100);
 };
 
 

@@ -34,12 +34,14 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
     greenSlider = new PercentSlider(tr("Green"), this, 100);
     blueSlider = new PercentSlider(tr("Blue"), this, 100);
     dirtSlider = new PercentSlider(tr("Dirt"), this, 0);
+    dirtCountSlider = new PercentSlider(tr("Dirt count"), this, 0, 5);
 
     auto *simulatorSettingsLayout = new QVBoxLayout(this);
     simulatorSettingsLayout->addWidget(redSlider);
     simulatorSettingsLayout->addWidget(greenSlider);
     simulatorSettingsLayout->addWidget(blueSlider);
     simulatorSettingsLayout->addWidget(dirtSlider);
+    simulatorSettingsLayout->addWidget(dirtCountSlider);
     simulatorSettings->setLayout(simulatorSettingsLayout);
     layout->addWidget(simulatorSettings);
 
@@ -69,7 +71,7 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
 }
 
 
-PercentSlider::PercentSlider(const QString& text, QWidget *parent, int value): QWidget(parent)
+PercentSlider::PercentSlider(const QString& text, QWidget *parent, int value, int maxValue): QWidget(parent)
 {
     auto *layout = new QHBoxLayout(this);
     layout->setMargin(0);
@@ -80,7 +82,7 @@ PercentSlider::PercentSlider(const QString& text, QWidget *parent, int value): Q
     slider->setFocusPolicy(Qt::StrongFocus);
     slider->setTickPosition(QSlider::TicksBelow);
     slider->setMinimum(0);
-    slider->setMaximum(100);
+    slider->setMaximum(maxValue);
     slider->setTickInterval(25);
     slider->setValue(value);
 

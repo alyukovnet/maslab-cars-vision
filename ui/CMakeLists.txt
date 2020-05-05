@@ -29,6 +29,8 @@ add_executable(maslab-cars-vision
         settingsLayout.h
         ../colorCast/colorCast.h
         ../colorCast/colorCast.cpp
+        ../dirtDetect/dirtDetect.cpp
+        ../dirtDetect/dirtDetect.h
 )
 
 target_link_libraries(maslab-cars-vision PRIVATE Qt5::Widgets ${OpenCV_LIBS} )

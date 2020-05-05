@@ -5,6 +5,7 @@
 #include <opencv2/imgproc.hpp>
 #include "settingsLayout.h"
 #include "video.h"
+#include "../dirtDetect/dirtDetect.h"
 
 using namespace cv;
 
@@ -12,7 +13,7 @@ Stream::Stream(SettingsLayout *settings) {
     inFrame = Mat::zeros(360, 640, CV_8UC3);
     outFrame = Mat::zeros(360, 640, CV_8UC3);
     cast[0] = cast[1] = cast[2] = 100;
-    dirt = 0;
+    dirt = dirtCount = 0;
     _settings = settings;
 }
 
@@ -43,6 +44,10 @@ void Stream::setDirt(int value) {
     dirt = value;
 }
 
+void Stream::setDirtCount(int value) {
+    dirtCount = value;
+}
+
 void Stream::close() {
     file.release();
 }
@@ -53,6 +58,7 @@ void Stream::process() {
         file.read(inFrame);
     }
     castVariator(inFrame, inFrame, cast[0], cast[1], cast[2]);
+    inFrame = dirtDetect.derter(inFrame, dirt, dirtCount);
     inFrame.copyTo(outFrame);
 
     switch (colorCast.detect(inFrame)) {
@@ -68,6 +74,12 @@ void Stream::process() {
             colorCast.correct(inFrame, outFrame);
             _settings->correctingIndicator->setStatus("Enabled", Indicator::GREEN);
             break;
+    }
+
+    if (dirtDetect.detectDirt(outFrame)){
+        _settings->dirtIndicator->setStatus("Detected", Indicator::RED);
+    } else {
+        _settings->dirtIndicator->setStatus("No");
     }
 }
 
