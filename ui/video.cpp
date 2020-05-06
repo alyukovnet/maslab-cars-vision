@@ -69,7 +69,8 @@ void Stream::process() {
     // simulator works
     castVariator(inFrame, inFrame, cast[0], cast[1], cast[2]);
     inFrame = dirtDetect->derter(inFrame, dirt, dirtCount);
-    blurDetect.blur(inFrame, inFrame, blur);
+    if (blur > 0)
+        blurDetect.blur(inFrame, inFrame, blur);
     inFrame.copyTo(outFrame);
 
     // ColorCast detection
