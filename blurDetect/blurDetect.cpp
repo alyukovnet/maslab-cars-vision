@@ -10,7 +10,7 @@ BlurDetect::BlurDetect() {
 }
 
 void BlurDetect::blur(Mat &inFrame, Mat &outFrame, int k) {
-    GaussianBlur(inFrame, outFrame, Size(k/10, k/10), 0);
+    GaussianBlur(inFrame, outFrame, Size(5, 5), 0);
 }
 
 bool BlurDetect::detect(Mat &frame) {

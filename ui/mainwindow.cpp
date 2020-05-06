@@ -53,7 +53,7 @@ void MainWindow::setupUi(QMainWindow *MainWindow)
     connect(settings->blueSlider->slider, SIGNAL(valueChanged(int)), vid, SLOT(setBlueCast(int)));
     connect(settings->dirtSlider->slider, SIGNAL(valueChanged(int)), vid, SLOT(setDirt(int)));
     connect(settings->dirtCountSlider->slider, SIGNAL(valueChanged(int)), vid, SLOT(setDirtCount(int)));
-    connect(settings->blurSlider, SIGNAL(stateChanged(int)), vid, SLOT(setBlur(int)));
+    connect(settings->blurSlider->slider, SIGNAL(valueChanged(int)), vid, SLOT(setBlur(int)));
     verticalLayout->addWidget(settings);
 
     MainWindow->setCentralWidget(centralwidget);
