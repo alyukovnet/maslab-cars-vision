@@ -9,8 +9,8 @@ using namespace std;
 BlurDetect::BlurDetect() {
 }
 
-void BlurDetect::blur(Mat &inFrame, Mat &outFrame) {
-    GaussianBlur(inFrame, outFrame, Size(5, 5), 0);
+void BlurDetect::blur(Mat &inFrame, Mat &outFrame, int k) {
+    GaussianBlur(inFrame, outFrame, Size(k/10, k/10), 0);
 }
 
 bool BlurDetect::detect(Mat &frame) {

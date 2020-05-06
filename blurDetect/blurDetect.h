@@ -8,7 +8,7 @@ using namespace cv;
 class BlurDetect {
 public:
     BlurDetect();
-    void blur(Mat& inFrame, Mat& outFrame);
+    void blur(Mat& inFrame, Mat& outFrame, int k );
     bool detect(Mat& frame);
 };
 

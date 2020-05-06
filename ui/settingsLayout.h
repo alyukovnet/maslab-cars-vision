@@ -28,7 +28,7 @@ public:
     PercentSlider *blueSlider;
     PercentSlider *dirtSlider;
     PercentSlider *dirtCountSlider;
-    QCheckBox *blurBool;
+    PercentSlider *blurSlider;
 
     Indicator *correctingIndicator;
     Indicator *colorCastIndicator;

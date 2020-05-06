@@ -36,8 +36,7 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
     blueSlider = new PercentSlider(tr("Blue"), this, 100);
     dirtSlider = new PercentSlider(tr("Dirt"), this, 0);
     dirtCountSlider = new PercentSlider(tr("Dirt count"), this, 0, 5);
-
-    blurBool = new QCheckBox(tr("Blur"), this);
+    blurSlider = new PercentSlider(tr("Blur"), this, 0);
 
     auto *simulatorSettingsLayout = new QVBoxLayout(this);
     simulatorSettingsLayout->addWidget(redSlider);
@@ -45,7 +44,7 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
     simulatorSettingsLayout->addWidget(blueSlider);
     simulatorSettingsLayout->addWidget(dirtSlider);
     simulatorSettingsLayout->addWidget(dirtCountSlider);
-    simulatorSettingsLayout->addWidget(blurBool);
+    simulatorSettingsLayout->addWidget(blurSlider);
     simulatorSettings->setLayout(simulatorSettingsLayout);
     layout->addWidget(simulatorSettings);
 
