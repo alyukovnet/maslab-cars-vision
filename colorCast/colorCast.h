@@ -35,9 +35,7 @@ public:
     //! Результаты обнаружения ColorCast
     enum ColorCastFlags {
         NO_CAST = 0,              //!< No cast
-        MILD = 1,                 //!< Color Cast is normal
-        DETECTED = 2,             //!< You can use ColorCast correction for frame
-        INCOMPATIBLE_CAMERA = 3,  //!< You can't use ColorCast correction
+        DETECTED = 1,             //!< You can use ColorCast correction for frame
     };
 
     /*!
