@@ -6,6 +6,7 @@
 #include "settingsLayout.h"
 #include "video.h"
 #include "../dirtDetect/dirtDetect.h"
+#include "../blurDetect/blurDetect.h"
 
 using namespace cv;
 
@@ -14,6 +15,7 @@ Stream::Stream(SettingsLayout *settings) {
     outFrame = Mat::zeros(360, 640, CV_8UC3);
     cast[0] = cast[1] = cast[2] = 100;
     dirt = dirtCount = 0;
+    blur = 0;
     dirtDetect = new DirtDetect;
     _settings = settings;
 }
@@ -49,6 +51,10 @@ void Stream::setDirtCount(int value) {
     dirtCount = value;
 }
 
+void Stream::setBlur(int flag) {
+    blur = flag;
+}
+
 void Stream::close() {
     file.release();
 }
@@ -63,6 +69,8 @@ void Stream::process() {
     // simulator works
     castVariator(inFrame, inFrame, cast[0], cast[1], cast[2]);
     inFrame = dirtDetect->derter(inFrame, dirt, dirtCount);
+    if (blur == 2)
+        blurDetect.blur(inFrame, inFrame);
     inFrame.copyTo(outFrame);
 
     // ColorCast detection
@@ -86,6 +94,12 @@ void Stream::process() {
         _settings->dirtIndicator->setStatus("Detected", Indicator::RED);
     } else {
         _settings->dirtIndicator->setStatus("No");
+    }
+
+    if (blurDetect.detect(inFrame)){
+        _settings->blurIndicator->setStatus("Detected", Indicator::YELLOW);
+    } else {
+        _settings->blurIndicator->setStatus("No");
     }
 }
 

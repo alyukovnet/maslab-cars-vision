@@ -31,6 +31,8 @@ add_executable(maslab-cars-vision
         ../colorCast/colorCast.cpp
         ../dirtDetect/dirtDetect.cpp
         ../dirtDetect/dirtDetect.h
+        ../blurDetect/blurDetect.cpp
+        ../blurDetect/blurDetect.h
 )
 
 target_link_libraries(maslab-cars-vision PRIVATE Qt5::Widgets ${OpenCV_LIBS} )

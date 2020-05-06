@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QString>
 #include <QLabel>
+#include <QCheckBox>
 
 
 SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
@@ -36,12 +37,15 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
     dirtSlider = new PercentSlider(tr("Dirt"), this, 0);
     dirtCountSlider = new PercentSlider(tr("Dirt count"), this, 0, 5);
 
+    blurBool = new QCheckBox(tr("Blur"), this);
+
     auto *simulatorSettingsLayout = new QVBoxLayout(this);
     simulatorSettingsLayout->addWidget(redSlider);
     simulatorSettingsLayout->addWidget(greenSlider);
     simulatorSettingsLayout->addWidget(blueSlider);
     simulatorSettingsLayout->addWidget(dirtSlider);
     simulatorSettingsLayout->addWidget(dirtCountSlider);
+    simulatorSettingsLayout->addWidget(blurBool);
     simulatorSettings->setLayout(simulatorSettingsLayout);
     layout->addWidget(simulatorSettings);
 

@@ -11,6 +11,7 @@
 #include <opencv2/videoio.hpp>
 #include "../colorCast/colorCast.h"
 #include "../dirtDetect/dirtDetect.h"
+#include "../blurDetect/blurDetect.h"
 #include "settingsLayout.h"
 
 using namespace std;
@@ -27,10 +28,12 @@ private:
     Mat outFrame;
     ColorCast colorCast;
     DirtDetect *dirtDetect;
+    BlurDetect blurDetect;
     SettingsLayout *_settings;
     int cast[3]{};
     int dirt;
     int dirtCount;
+    int blur;
 public:
     Stream(SettingsLayout *settings);
     bool open(string);
@@ -47,6 +50,7 @@ public slots:
     void setBlueCast(int);
     void setDirt(int);
     void setDirtCount(int);
+    void setBlur(int);
 };
 
 

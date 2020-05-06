@@ -9,6 +9,7 @@
 #include <QSlider>
 #include <QString>
 #include <QLabel>
+#include <QCheckBox>
 
 // announcements
 class PercentSlider;
@@ -27,6 +28,7 @@ public:
     PercentSlider *blueSlider;
     PercentSlider *dirtSlider;
     PercentSlider *dirtCountSlider;
+    QCheckBox *blurBool;
 
     Indicator *correctingIndicator;
     Indicator *colorCastIndicator;
