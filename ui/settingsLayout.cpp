@@ -109,13 +109,13 @@ Indicator::Indicator(const QString& name, QWidget *parent): QWidget(parent) {
 }
 
 void Indicator::setStatus(const string& s, int color) {
-    if (color == 1)
+    if (color == RED)
         status->setStyleSheet("QLabel { color : white; background-color: red; font-weight: bold; }");
-    else if (color == 2)
+    else if (color == YELLOW)
         status->setStyleSheet("QLabel { color : black; background-color: yellow; font-weight: bold; }");
-    else if (color == 3)
+    else if (color == GREEN)
         status->setStyleSheet("QLabel { color : white; background-color: green; font-weight: bold; }");
-    else
-        status->setStyleSheet("QLabel { color : white; font-weight: bold; }");
+    else if (color == NEUTRAL)
+        status->setStyleSheet("QLabel { font-weight: bold; }");
     status->setText(QString::fromStdString(s));
 }
