@@ -24,6 +24,7 @@ private:
     double M_b_;         //!< Описание
     double M_;           //!< Описание
     Mat inputLab_;       //!< Lab image
+    Mat inputBright_;    //!< Input image with modified brightness
 public:
     /*!
     Конструктор класса ColorCast
