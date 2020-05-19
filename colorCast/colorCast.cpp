@@ -23,13 +23,15 @@ int ColorCast::detect(Mat& input)
 			Kp = 1.9 - (130 - Mat_mean[0])/260.0;
 			con = (int)con*(1.0 + 1.3*(130 - Mat_mean[0])/130.0);
 			brightness = brightness + (int)20*(130 - Mat_mean[0])/130.0;
-			input.convertTo(input, -1, 3.0*con/100.0, brightness);
-	}
-    cvtColor(input, inputLab_, COLOR_BGR2Lab);
+			input.convertTo(inputBright_, -1, 3.0 * con / 100.0, brightness);
+	} else {
+        input.copyTo(inputBright_);
+    }
+    cvtColor(inputBright_, inputLab_, COLOR_BGR2Lab);
     Mat_mean = mean(inputLab_);
     mean_a_ = Mat_mean[1] - 128;
     mean_b_ = Mat_mean[2] - 128;
-    Mat diffMat(input.rows, input.cols, CV_8UC3, Mat_mean);
+    Mat diffMat(inputBright_.rows, inputBright_.cols, CV_8UC3, Mat_mean);
     absdiff(inputLab_, Mat_mean, diffMat); // diff Input image and mean
     Scalar diffMat_mean = mean(diffMat);
     M_a_ = diffMat_mean[1];
