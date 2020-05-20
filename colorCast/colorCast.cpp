@@ -53,13 +53,16 @@ double ColorCast::getCastFactor()
 
 void ColorCast::correct(Mat& input, Mat& output) 
 {
-    Scalar Mat_mean = mean(output);  // Mean values of BGR
+    Mat input_32bit;
+    inputBright_.convertTo(input_32bit, CV_32FC3);
+    Scalar Mat_mean = mean(input_32bit);  // Mean values of BGR
     // Gray scale method
-    Mat maskGray(input.rows, input.cols, CV_8UC3, Scalar(
+    Mat maskGray(input_32bit.rows, input_32bit.cols, CV_32FC3, Scalar(
             127/Mat_mean[0],
             127/Mat_mean[1],
             127/Mat_mean[2]));
-    multiply(output, maskGray, output);
+    multiply(input_32bit, maskGray, input_32bit);
+    input_32bit.convertTo(output, CV_8UC3);
 }
 
 ColorCast::~ColorCast() 
