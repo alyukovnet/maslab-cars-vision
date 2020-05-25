@@ -17,7 +17,7 @@ bool BlurDetect::detect(Mat &frame) {
     Mat finish;
     Mat gray;
 
-    double theshhold = 100.0;
+    double theshhold =100.0;
 
     cvtColor(frame, gray, COLOR_BGR2GRAY);
 

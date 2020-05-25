@@ -96,7 +96,7 @@ void Stream::process() {
         _settings->dirtIndicator->setStatus("No");
     }
 
-    if (blurDetect.detect(inFrame)){
+    if (blurDetect.detect(outFrame)){
         _settings->blurIndicator->setStatus("Detected", Indicator::YELLOW);
     } else {
         _settings->blurIndicator->setStatus("No");
