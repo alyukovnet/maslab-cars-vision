@@ -35,6 +35,7 @@ public:
     Indicator *castFactorIndicator;
     Indicator *dirtIndicator;
     Indicator *blurIndicator;
+    Indicator *blurFactorIndicator;
 
     explicit SettingsLayout(QWidget *parent);
 };

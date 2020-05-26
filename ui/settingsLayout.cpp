@@ -70,6 +70,9 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
     blurIndicator = new Indicator("Blur", this);
     outputSettingsLayout->addWidget(blurIndicator);
 
+    blurFactorIndicator = new Indicator("Blur Factor", this);
+    outputSettingsLayout->addWidget(blurFactorIndicator);
+
     this->setLayout(layout);
 }
 

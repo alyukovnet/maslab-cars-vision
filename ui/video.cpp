@@ -95,10 +95,12 @@ void Stream::process() {
     } else {
         _settings->dirtIndicator->setStatus("No");
     }
-
+    // Blur Detection
     if (blurDetect.detect(outFrame)){
+        _settings->blurFactorIndicator->setStatus(to_string(blurDetect.getBlurFactor()));
         _settings->blurIndicator->setStatus("Detected", Indicator::YELLOW);
     } else {
+        _settings->blurFactorIndicator->setStatus(to_string(blurDetect.getBlurFactor()));
         _settings->blurIndicator->setStatus("No");
     }
 }

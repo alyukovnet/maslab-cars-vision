@@ -7,6 +7,7 @@ using namespace std;
 
 
 BlurDetect::BlurDetect() {
+    BlurFactor_ = 0;
 }
 
 void BlurDetect::blur(Mat &inFrame, Mat &outFrame, int k) {
@@ -27,6 +28,11 @@ bool BlurDetect::detect(Mat &frame) {
     meanStdDev(finish, m, variance_s);
 
     double variance = variance_s[0]*variance_s[0];
-
-    return variance < theshhold;
+    BlurFactor_=variance;
+    return BlurFactor_ < theshhold;
 }
+
+double BlurDetect::getBlurFactor() 
+{
+    return BlurFactor_;
+};
