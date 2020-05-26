@@ -57,6 +57,12 @@ void Stream::setBlur(int flag) {
 
 void Stream::close() {
     file.release();
+    _settings->colorCastIndicator->clear();
+    _settings->castFactorIndicator->clear();
+    _settings->correctingIndicator->clear();
+    _settings->dirtIndicator->clear();
+    _settings->blurIndicator->clear();
+    _settings->blurFactorIndicator->clear();
 }
 
 void Stream::process() {

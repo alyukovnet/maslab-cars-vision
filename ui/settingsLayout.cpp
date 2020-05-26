@@ -29,7 +29,7 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
 
     // Simulator settings
     auto *simulatorSettings = new QGroupBox(this);
-    simulatorSettings->setTitle(tr("Simulator parameters"));
+    simulatorSettings->setTitle(tr("Imitation parameters"));
 
     redSlider = new PercentSlider(tr("Red"), this, 100);
     greenSlider = new PercentSlider(tr("Green"), this, 100);
@@ -50,7 +50,7 @@ SettingsLayout::SettingsLayout(QWidget *parent): QWidget(parent)
 
     // Output settings
     auto *outputSettings = new QGroupBox(this);
-    outputSettings->setTitle(tr("Output settings"));
+    outputSettings->setTitle(tr("Output"));
     auto *outputSettingsLayout = new QVBoxLayout(this);
     outputSettings->setLayout(outputSettingsLayout);
     layout->addWidget(outputSettings);
@@ -120,4 +120,8 @@ void Indicator::setStatus(const string& s, int color) {
     else if (color == NEUTRAL)
         status->setStyleSheet("QLabel { font-weight: bold; }");
     status->setText(QString::fromStdString(s));
+}
+
+void Indicator::clear() {
+    this->setStatus("");
 }

@@ -68,6 +68,8 @@ public:
     };
 
     void setStatus(const String& s, int color = 0);
+
+    void clear();
 };
 
 #endif //MASLAB_CARS_VISION_PERCENTSLIDER_H
