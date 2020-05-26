@@ -30,7 +30,6 @@ bool BlurDetect::detect(Mat &frame) {
     double variance = variance_s[0]*variance_s[0];
     BlurFactor_=variance;
     return BlurFactor_ < theshhold;
-     return BlurFactor_;
 }
 
 double BlurDetect::getBlurFactor() 
