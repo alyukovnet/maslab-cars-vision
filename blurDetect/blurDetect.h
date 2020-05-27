@@ -6,10 +6,17 @@
 using namespace cv;
 
 class BlurDetect {
+    private: 
+    double BlurFactor_;
+
 public:
+
     BlurDetect();
     void blur(Mat& inFrame, Mat& outFrame, int k );
     bool detect(Mat& frame);
+
+
+    double getBlurFactor();
 };
 
 

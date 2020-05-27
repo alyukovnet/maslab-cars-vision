@@ -57,6 +57,12 @@ void Stream::setBlur(int flag) {
 
 void Stream::close() {
     file.release();
+    _settings->colorCastIndicator->clear();
+    _settings->castFactorIndicator->clear();
+    _settings->correctingIndicator->clear();
+    _settings->dirtIndicator->clear();
+    _settings->blurIndicator->clear();
+    _settings->blurFactorIndicator->clear();
 }
 
 void Stream::process() {
@@ -95,10 +101,12 @@ void Stream::process() {
     } else {
         _settings->dirtIndicator->setStatus("No");
     }
-
-    if (blurDetect.detect(inFrame)){
+    // Blur Detection
+    if (blurDetect.detect(outFrame)){
+        _settings->blurFactorIndicator->setStatus(to_string(blurDetect.getBlurFactor()));
         _settings->blurIndicator->setStatus("Detected", Indicator::YELLOW);
     } else {
+        _settings->blurFactorIndicator->setStatus(to_string(blurDetect.getBlurFactor()));
         _settings->blurIndicator->setStatus("No");
     }
 }

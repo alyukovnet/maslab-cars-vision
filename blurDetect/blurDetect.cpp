@@ -7,17 +7,18 @@ using namespace std;
 
 
 BlurDetect::BlurDetect() {
+    BlurFactor_ = 0;
 }
 
 void BlurDetect::blur(Mat &inFrame, Mat &outFrame, int k) {
-    GaussianBlur(inFrame, outFrame, Size(5, 5), 0);
+    GaussianBlur(inFrame, outFrame, Size(k/5*2+1, k/5*2+1), 0);
 }
 
 bool BlurDetect::detect(Mat &frame) {
     Mat finish;
     Mat gray;
 
-    double theshhold = 100.0;
+    double theshhold =100.0;
 
     cvtColor(frame, gray, COLOR_BGR2GRAY);
 
@@ -27,6 +28,11 @@ bool BlurDetect::detect(Mat &frame) {
     meanStdDev(finish, m, variance_s);
 
     double variance = variance_s[0]*variance_s[0];
-
-    return variance < theshhold;
+    BlurFactor_=variance;
+    return BlurFactor_ < theshhold;
 }
+
+double BlurDetect::getBlurFactor() 
+{
+    return BlurFactor_;
+};
