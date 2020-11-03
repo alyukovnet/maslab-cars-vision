@@ -32,7 +32,7 @@ int Stream::getDelay() {
 }
 
 void Stream::setRedCast(int value) {
-    cast[2] = value;
+    cast[0] = value;
 }
 
 void Stream::setGreenCast(int value) {
@@ -40,7 +40,7 @@ void Stream::setGreenCast(int value) {
 }
 
 void Stream::setBlueCast(int value) {
-    cast[0] = value;
+    cast[2] = value;
 }
 
 void Stream::setDirt(int value) {
