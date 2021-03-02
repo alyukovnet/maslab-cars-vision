@@ -1,5 +1,5 @@
 #include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
+//#include <opencv2/highgui.hpp>
 
 #include "core/interface.h"
 #include "colorCast/colorCast.h"
@@ -68,10 +68,10 @@ int main(int argc, char *argv[])
 //        imshow("Output", frameOut);
 //        resizeWindow("Output", 720, 405);
         // Hot keys
-        switch ((char) waitKey(25)) {
-            case 'q':             // Quit
-                exit(0);
-        }
+//        switch ((char) waitKey(25)) {
+//            case 'q':             // Quit
+//                exit(0);
+//        }
         time_start = clock();
     }
 
