@@ -31,7 +31,7 @@ private:
     VideoCapture cap;          ///< Input video
     ofstream file;             ///< Text logs file
     // Args
-    String videoSource;        ///< Input video path
+    int videoSource;           ///< Input camera num
     String logFileName;        ///< Name for log file
     // Flags
     bool repeat;

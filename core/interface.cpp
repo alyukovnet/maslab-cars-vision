@@ -11,7 +11,7 @@ using namespace cv;
 
 Interface::Interface(int argc, char *argv[]) {
     const string keys =
-            "{ @input         |   | Path to input video (required) }"
+            "{ @input         |   | Camera number (required)       }"
             "{ help h usage ? |   | Print this message             }"
             "{ rotate         | 0 | Rotate +-90° CW                }"
             "{ flip           |   | Rotate 180°                    }"
@@ -27,7 +27,7 @@ Interface::Interface(int argc, char *argv[]) {
         parser.printMessage(); // Help message
         exit(0);
     }
-    videoSource = parser.get<String>(0); // input (required)
+    videoSource = parser.get<int>(0); // input (required)
     if (parser.has("log"))
         logFileName = parser.get<String>("log"); // save (if necessary)
     int rotate = parser.get<int>("rotate"); // rotate (default 0)
