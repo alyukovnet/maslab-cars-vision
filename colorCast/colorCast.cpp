@@ -13,6 +13,7 @@ ColorCast::ColorCast()
 
 int ColorCast::detect(Mat& input) 
 {
+    return DETECTED;
     // averageChrominanceAndMomentum
     int con = 33;
     int brightness = 0;
@@ -31,7 +32,7 @@ int ColorCast::detect(Mat& input)
     Mat_mean = mean(inputLab_);
     mean_a_ = Mat_mean[1] - 128;
     mean_b_ = Mat_mean[2] - 128;
-    Mat diffMat(input.rows, input.cols, CV_8UC3, Mat_mean);
+    Mat diffMat(input.rows, input.cols, CV_8UC3);
     absdiff(inputLab_, Mat_mean, diffMat); // diff Input image and mean
     Scalar diffMat_mean = mean(diffMat);
     M_a_ = diffMat_mean[1];
