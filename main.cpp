@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 //                break;
 //        }
         time_end = clock();
-        printf("%f fps", (float)(CLOCKS_PER_SEC/(time_end-time_start)));
+        printf("%f fps\n", (float)(CLOCKS_PER_SEC/(time_end-time_start)));
 
         // dirtDetect here
 //        if(dirtDetect.detectDirt(frameOut)){
