@@ -40,16 +40,16 @@ int main(int argc, char *argv[])
 // 		  castVariator(frame, frame, red, green, blue);  // Cast magic
 //        frame = dirtDetect.derter(frame,dirt,dirtc);
 //        frame.copyTo(frameOut);
-//        switch (colorCast.detect(frame)) {
-//            case ColorCast::NO_CAST:
-//                interface.log(format("K = %f -----> NO CAST", colorCast.getCastFactor()));
-//                break;
-//            case ColorCast::DETECTED:
-//                interface.log(format("K = %f -----> COLOR CAST DETECTED", colorCast.getCastFactor()));
-//                // ColorCast correction
-//                colorCast.correct(frame, frame);
-//                break;
-//        }
+        switch (colorCast.detect(frame)) {
+            case ColorCast::NO_CAST:
+                interface.log(format("K = %f -----> NO CAST", colorCast.getCastFactor()));
+                break;
+            case ColorCast::DETECTED:
+                interface.log(format("K = %f -----> COLOR CAST DETECTED", colorCast.getCastFactor()));
+                // ColorCast correction
+                colorCast.correct(frame, frame);
+                break;
+        }
         time_end = clock();
         printf("%f fps\n", (float)(CLOCKS_PER_SEC/(time_end-time_start)));
 
