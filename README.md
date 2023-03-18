@@ -1,6 +1,10 @@
 # maslab-cars-vision
 Detecting problems with camera and maintaining cars functioning.
 
+[DEMO VIDEO](https://www.youtube.com/watch?v=PdSda2QE1yg&t=38s)
+
+[PUBLICATION](https://ceur-ws.org/Vol-2893/paper_18.pdf)
+
 ## Build
 ### Requirements
 1) g++ compiler
